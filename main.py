@@ -8,7 +8,7 @@ from aiogram.types import WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 TOKEN = "8858932432:AAHtO4z5ivP3WGK39c2kPChJgKfmpIL9jb4"
 
 # GitHub Pages havolangiz
-WEB_APP_URL = "https://anvarsolexov.github.io/my-mini-app/"
+WEB_APP_URL = "https://vipstarsuzb-ctrl.github.io/vipstars-bot/"
 
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
