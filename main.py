@@ -9,21 +9,17 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from deep_translator import GoogleTranslator
 
-# Tokenni Render Environment Variables orqali xavfsiz o'qiymiz
+# Render'dagi Environment Variable'dan tokenni o'qiymiz
 TOKEN = os.environ.get("BOT_TOKEN")
 
-if not TOKEN:
-    raise ValueError("BOT_TOKEN topilmadi! Render Environment Variables qismini tekshiring.")
-
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
 
 class LogoState(StatesGroup):
     waiting_for_prompt = State()
     waiting_for_style = State()
 
 translator = GoogleTranslator(source='auto', target='en')
+dp = Dispatcher()
 
 @dp.message(Command("start"))
 async def start_cmd(message: types.Message, state: FSMContext):
@@ -113,6 +109,10 @@ async def generate_logo(call: types.CallbackQuery, state: FSMContext):
     await state.set_state(LogoState.waiting_for_prompt)
 
 async def main():
+    if not TOKEN:
+        raise ValueError("BOT_TOKEN topilmadi! Render panellarida Environment Variable qismini tekshiring.")
+    
+    bot = Bot(token=TOKEN)
     print("Logo bot ishga tushdi...")
     await dp.start_polling(bot)
 
